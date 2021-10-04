@@ -2,6 +2,7 @@
 let express = require('express');
 let router = express.Router();
 const pool = require("../DB.js");
+const grades = require('../data/Grades.json');
 
 // GET all the climbing grades
 router.get('/climbingGrades', async function(req, res) {
@@ -19,12 +20,8 @@ router.get('/climbingGrades', async function(req, res) {
 // GET all the expertise levels
 router.get('/', async function(req, res) {
   try {
-    const q = 'SELECT * FROM dbo.ExpertiseLevel';
-    const todos = await pool.query(q)
-    // const test = JSON.parse(todos)
-    // res.send(test);
-    res.json(todos);
-    console.log("Retrieved all items from dbo.Grades")
+    res.json(grades);
+    console.log("Retrieved all dummy items from dbo.Grades")
 
   } catch (err) {
     console.error(err.message);
