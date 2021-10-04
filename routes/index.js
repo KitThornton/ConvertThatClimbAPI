@@ -44,7 +44,7 @@ router.get('/expertiseLevel', async function(req, res) {
 // GET all the grading systems
 router.get('/gradingSystems', async function(req, res) {
   try {
-    const q = 'SELECT * FROM dbo.ExpertiseLevel';
+    const q = 'SELECT * FROM dbo.gradingSystems';
     const todos = await pool.query(q)
     res.json(todos);
     console.log("Retrieved all items from dbo.Grades")
