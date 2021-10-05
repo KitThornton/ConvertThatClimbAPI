@@ -2,7 +2,21 @@
 let express = require('express');
 let router = express.Router();
 const pool = require("../DB.js");
-const grades = require('../data/Grades.json');
+// const grades = require('../data/Grades.json');
+
+// GET all the expertise levels
+router.get('/', async function(req, res) {
+  try {
+    const q = 'SELECT * FROM dbo.vwgradeswithdescription';
+    const grades = await pool.query(q)
+
+    res.json(grades);
+    console.log("Retrieved all items from dbo.Grades")
+
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 // GET all the climbing grades
 router.get('/climbingGrades', async function(req, res) {
@@ -15,18 +29,7 @@ router.get('/climbingGrades', async function(req, res) {
   } catch (err) {
     console.error(err.message);
   }
-})
-
-// GET all the expertise levels
-router.get('/', async function(req, res) {
-  try {
-    res.json(grades);
-    console.log("Retrieved all dummy items from dbo.Grades")
-
-  } catch (err) {
-    console.error(err.message);
-  }
-})
+});
 
 // GET all the expertise levels
 router.get('/expertiseLevel', async function(req, res) {
@@ -39,7 +42,7 @@ router.get('/expertiseLevel', async function(req, res) {
   } catch (err) {
     console.error(err.message);
   }
-})
+});
 
 // GET all the grading systems
 router.get('/gradingSystems', async function(req, res) {
@@ -52,6 +55,6 @@ router.get('/gradingSystems', async function(req, res) {
   } catch (err) {
     console.error(err.message);
   }
-})
+});
 
 module.exports = router;
