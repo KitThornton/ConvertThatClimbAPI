@@ -2,29 +2,14 @@
 let express = require('express');
 let router = express.Router();
 const pool = require("../DB.js");
-// const grades = require('../data/Grades.json');
 
-// GET all the expertise levels
-router.get('/', async function(req, res) {
-  try {
-    const q = 'SELECT * FROM dbo.vwgradeswithdescription';
-    const grades = await pool.query(q)
-
-    res.json(grades);
-    console.log("Retrieved all items from dbo.Grades")
-
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-// GET all the climbing grades
+// GET all the climbing grades with descriptions
 router.get('/climbingGrades', async function(req, res) {
   try {
-    const q = 'SELECT * FROM dbo.Grades';
+    const q = 'SELECT * FROM dbo.vwgradeswithdescription';
     const todos = await pool.query(q)
     res.json(todos);
-    console.log("Retrieved all items from dbo.Grades")
+    console.log("Retrieved all items from dbo.vwgradeswithdescription")
 
   } catch (err) {
     console.error(err.message);
@@ -32,7 +17,7 @@ router.get('/climbingGrades', async function(req, res) {
 });
 
 // GET all the expertise levels
-router.get('/expertiseLevel', async function(req, res) {
+router.get('/expertiseLevels', async function(req, res) {
   try {
     const q = 'SELECT * FROM dbo.ExpertiseLevel';
     const todos = await pool.query(q)
